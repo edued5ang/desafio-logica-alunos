@@ -138,7 +138,6 @@
 
     <script>
         function corrigirQuiz() {
-            // Respostas esperadas (podem ter variações)
             const respostasCorretas = {
                 q1: "64",
                 q2: "ele é baixinho|nanico|baixo|não alcança|guarda-chuva",
@@ -175,14 +174,12 @@
                 }
             }
 
-            // Mostrar resultados
             document.getElementById('pontuacao').textContent = `Você acertou ${pontuacao} de 10 questões!`;
             document.getElementById('respostas-detalhadas').innerHTML = detalhes;
             document.getElementById('resultado').style.display = 'block';
-
-            // Rolagem suave para o resultado
             document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
 </html>
+
