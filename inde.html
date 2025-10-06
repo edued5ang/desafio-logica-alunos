@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio de Lógica - Pensamento Computacional</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .questionario {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .pergunta {
+            margin-bottom: 25px;
+            padding: 15px;
+            border-left: 4px solid #4CAF50;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        h2 {
+            color: #34495e;
+            font-size: 1.1em;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            display: block;
+            margin: 20px auto;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #resultado {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f5e8;
+            border-radius: 5px;
+            display: none;
+        }
+        .resposta-correta {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .resposta-errada {
+            color: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="questionario">
+        <h1>🧠 Desafio de Lógica - Pensamento Computacional</h1>
+        <p>Instruções: Responda as questões abaixo baseado em sua pesquisa e raciocínio lógico.</p>
+
+        <form id="quizForm">
+            <div class="pergunta">
+                <h2>1. Qual é o próximo número na sequência: 2, 4, 8, 16, 32, ___?</h2>
+                <input type="text" id="q1" placeholder="Sua resposta...">
+            </div>
+
+            <div class="pergunta">
+                <h2>2. Um homem mora no 10º andar. Nos dias de chuva, ele sobe até o 7º e sobe 3 andares de escada. Por quê?</h2>
+                <input type="text" id="q2" placeholder="Sua resposta...">
+            </div>
+
+            <div class="pergunta">
+                <h2>3. Com selos de 2 e 7 centavos, qual o MAIOR valor que NÃO pode ser formado?</h2>
+                <input type="text" id="q3" placeholder="Sua resposta...">
+            </div>
+
+            <div class="pergunta">
+                <h2>4. Se eu disser "Estou mentindo agora", isso é verdade ou mentira?</h2>
+                <input type="text" id="q4" placeholder="Sua resposta...">
+            </div>
+
+            <div class="pergunta">
+                <h2>5. Qual palavra de 5 letras em inglês pode ter sua última letra removida sem mudar a pronúncia?</h2>
+                <input type="text" id="q5" placeholder="Sua resposta...">
+            </div>
+
+            <div class="pergunta">
+                <h2>6. Se um relógio leva 5 segundos para bater 6 horas, quanto leva para bater 12 horas?</h2>
+                <input type="text" id="q6" placeholder="Sua resposta...">
+            </div>
+
+            <div class="pergunta">
+                <h2>7. Como corrigir 5 + 5 + 5 = 550 movendo UM palito de fósforo?</h2>
+                <input type="text" id="q7" placeholder="Sua resposta...">
+            </div>
+
+            <div class="pergunta">
+                <h2>8. "O pai desse homem é o filho do meu pai." Quem é o homem na foto?</h2>
+                <input type="text" id="q8" placeholder="Sua resposta...">
+            </div>
+
+            <div class="pergunta">
+                <h2>9. Um homem anda 1km Sul, 1km Leste, 1km Norte e volta ao início. De que cor é o urso que ele viu?</h2>
+                <input type="text" id="q9" placeholder="Sua resposta...">
+            </div>
+
+            <div class="pergunta">
+                <h2>10. Com 3 interruptores e 1 lâmpada cada, como descobrir qual é qual entrando UMA vez na sala?</h2>
+                <input type="text" id="q10" placeholder="Descreva brevemente sua solução...">
+            </div>
+
+            <button type="button" onclick="corrigirQuiz()">📊 Corrigir Respostas</button>
+        </form>
+
+        <div id="resultado">
+            <h2>🎯 Seu Resultado:</h2>
+            <p id="pontuacao"></p>
+            <div id="respostas-detalhadas"></div>
+        </div>
+    </div>
+
+    <script>
+        function corrigirQuiz() {
+            // Respostas esperadas (podem ter variações)
+            const respostasCorretas = {
+                q1: "64",
+                q2: "ele é baixinho|nanico|baixo|não alcança|guarda-chuva",
+                q3: "5",
+                q4: "paradoxo|paradoxo lógico|não tem resposta|nem verdade nem mentira",
+                q5: "queue",
+                q6: "11|11 segundos",
+                q7: "545 + 5 = 550|fazer 4 com o primeiro +",
+                q8: "filho|seu filho|meu filho",
+                q9: "branca|branco|urso polar|polar",
+                q10: "ligar um|esperar|desligar|ligar outro|quente|quente e apagada"
+            };
+
+            let pontuacao = 0;
+            let detalhes = "";
+
+            for (let i = 1; i <= 10; i++) {
+                const respostaUsuario = document.getElementById(`q${i}`).value.toLowerCase().trim();
+                const respostasAceitas = respostasCorretas[`q${i}`].split("|");
+                
+                let acertou = false;
+                for (let resp of respostasAceitas) {
+                    if (respostaUsuario.includes(resp) && resp !== "") {
+                        acertou = true;
+                        break;
+                    }
+                }
+
+                if (acertou) {
+                    pontuacao++;
+                    detalhes += `<p class="resposta-correta">✅ Questão ${i}: Correta!</p>`;
+                } else {
+                    detalhes += `<p class="resposta-errada">❌ Questão ${i}: Incorreta. Continue pensando!</p>`;
+                }
+            }
+
+            // Mostrar resultados
+            document.getElementById('pontuacao').textContent = `Você acertou ${pontuacao} de 10 questões!`;
+            document.getElementById('respostas-detalhadas').innerHTML = detalhes;
+            document.getElementById('resultado').style.display = 'block';
+
+            // Rolagem suave para o resultado
+            document.getElementById('resultado').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
